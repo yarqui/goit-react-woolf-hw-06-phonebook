@@ -4,7 +4,7 @@ import ContactListItem from "../ContactListItem/ContactListItem";
 
 const ContactList = ({ contacts, deleteContact }) => {
   return (
-    <ul>
+    <ul className="flex flex-col">
       {contacts?.map(({ name, number, id }) => (
         <ContactListItem
           key={id}

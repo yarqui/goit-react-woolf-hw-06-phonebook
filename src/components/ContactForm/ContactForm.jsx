@@ -39,9 +39,9 @@ const ContactForm = ({ addContact }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 border-b-2 border-slate-200 pb-8"
+      className="flex flex-col gap-5 border-b-2 border-slate-200 pb-10"
     >
-      <div className="flex flex-col-reverse gap-1">
+      <div className="relative flex flex-col-reverse gap-1">
         <Input
           id="name"
           type="text"
@@ -51,26 +51,40 @@ const ContactForm = ({ addContact }) => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           onChange={handleInputChange}
           required
-          className="focus:peer"
+          className="peer placeholder-transparent"
+          placeholder="Name"
         />
-        <Label htmlFor="name" label="Name" />
+        <Label
+          htmlFor="name"
+          label="Name"
+          className="pointer-events-none absolute -top-3.5 left-0 text-sm font-semibold text-slate-600 transition-all hover:cursor-text peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
+        peer-placeholder-shown:font-normal peer-placeholder-shown:text-slate-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:font-semibold peer-focus:text-slate-600"
+        />
       </div>
 
-      <div className="flex flex-col-reverse gap-1">
+      <div className="relative flex flex-col gap-1">
         <Input
           id="number"
           type="number"
           name="number"
           value={userCredentials.number}
           title="May contain only numbers"
+          placeholder="Number"
           onChange={handleInputChange}
           required
-          className="focus:peer"
+          className="peer placeholder-transparent"
         />
-        <Label htmlFor="number" label="Number" />
+        <Label
+          htmlFor="number"
+          label="Number"
+          className="pointer-events-none absolute -top-3.5 left-0 text-sm font-semibold text-slate-600 transition-all hover:cursor-text peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
+        peer-placeholder-shown:font-normal peer-placeholder-shown:text-slate-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:font-semibold peer-focus:text-slate-600"
+        />
       </div>
 
-      <Button type="submit" label="Add contact" className="btn" />
+      <Button type="submit" className="btn-regular">
+        Add contact
+      </Button>
     </form>
   );
 };

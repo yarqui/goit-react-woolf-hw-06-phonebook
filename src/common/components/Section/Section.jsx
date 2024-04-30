@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Section = ({ children }) => {
   return (
-    <section className="flex flex-col rounded-2xl bg-white p-4 shadow">
+    <section className="flex flex-col rounded-2xl bg-white p-8 shadow">
       {children}
     </section>
   );

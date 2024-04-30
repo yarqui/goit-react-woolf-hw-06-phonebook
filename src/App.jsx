@@ -76,12 +76,12 @@ const App = () => {
   return (
     <div className="container ">
       <Section>
-        <Heading level={1} className="mb-6 text-3xl font-extrabold">
+        <Heading level={1} className="mb-8 text-3xl font-extrabold">
           {Titles.PHONEBOOK}
         </Heading>
         <ContactForm addContact={addContact} />
 
-        <Heading level={2} className="text-2xl font-bold pt-8">
+        <Heading level={2} className="mb-8 pt-8 text-2xl font-bold">
           {Titles.CONTACTS}
         </Heading>
         <Filter filterContacts={filterContacts} />

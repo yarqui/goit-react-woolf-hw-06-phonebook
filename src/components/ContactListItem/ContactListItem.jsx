@@ -1,16 +1,25 @@
 import PropTypes from "prop-types";
+import { IoCloseOutline } from "react-icons/io5";
 
 import Button from "../../common/components/Button/Button";
 
-
 const ContactListItem = ({ id, name, number, deleteContact }) => {
   return (
-    <li className="mb-2 flex flex-wrap items-center justify-between">
-      <div className="flex flex-wrap gap-8">
-        <span>{name}</span>
-        <span>{number}</span>
+    <li className="flex items-center justify-between border-b-2 border-slate-100 py-2 ps-2 transition-colors hover:bg-slate-50">
+      <div className="flex max-w-full flex-wrap items-center gap-8">
+        <span className=" min-w-20 hyphens-auto text-base font-semibold">
+          {name}:
+        </span>
+        <span className="break-all text-sm text-slate-500 ">{number}</span>
       </div>
-      <Button type="button" label="Delete" onClick={() => deleteContact(id)} />
+
+      <Button
+        type="button"
+        onClick={() => deleteContact(id)}
+        className="btn-close"
+      >
+        <IoCloseOutline className="h-6 w-6" />
+      </Button>
     </li>
   );
 };

@@ -8,6 +8,7 @@ const Input = ({
   onChange,
   pattern,
   title,
+  placeholder,
   required,
   className = "",
 }) => {
@@ -18,6 +19,7 @@ const Input = ({
       name={name}
       value={value}
       title={title}
+      placeholder={placeholder}
       pattern={pattern}
       onChange={onChange}
       required={required}
@@ -34,6 +36,7 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   pattern: PropTypes.string,
   title: PropTypes.string,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   className: PropTypes.string,
 };

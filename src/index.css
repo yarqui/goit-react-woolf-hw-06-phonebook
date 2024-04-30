@@ -31,7 +31,7 @@ input[type="number"] {
   }
 
   input {
-    @apply rounded-full  border-2 border-slate-400 px-4 py-2 outline-none transition-colors focus:border-emerald-800;
+    @apply border-b-2 border-slate-400 py-2 outline-none transition-all focus:border-slate-600;
   }
 }
 
@@ -40,11 +40,11 @@ input[type="number"] {
     @apply mx-auto my-6 flex max-w-md flex-col justify-center gap-4 px-6;
   }
 
-  .btn {
-    @apply w-max self-center rounded-full border-2 border-slate-400 px-4 py-2 transition-colors duration-200 hover:border-slate-800 hover:bg-slate-800 hover:text-slate-50;
+  .btn-regular {
+    @apply w-max self-center rounded-full border-2 border-slate-600 px-4 py-2 transition-colors duration-200 hover:border-slate-800 hover:bg-slate-800 hover:text-slate-50;
   }
 
-  input:focus + label {
-    @apply font-semibold text-emerald-800;
+  .btn-close {
+    @apply p-1 hover:text-red-500;
   }
 }

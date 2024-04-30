@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 
-const Button = ({ type, label, onClick, className = "" }) => {
+const Button = ({ type, children, onClick, className = "" }) => {
   return (
     <button type={type} onClick={onClick} className={className}>
-      {label}
+      {children}
     </button>
   );
 };
 
 Button.propTypes = {
   type: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  children: PropTypes.node,
   onClick: PropTypes.func,
   className: PropTypes.string,
 };
