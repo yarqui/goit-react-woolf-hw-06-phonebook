@@ -1,17 +1,28 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 
 import Button from "../../common/components/Button/Button";
 import Label from "../Label/Label";
 import Input from "../Input/Input";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addContact } from "../../redux/slices/contactsSlice";
+import { nanoid } from "@reduxjs/toolkit";
+import { getContacts } from "../../redux/selectors/selectors";
+import { Notify } from "notiflix";
 const INITIAL_STATE = {
   name: "",
   number: "",
 };
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
   const [userCredentials, setUserCredentials] = useState(INITIAL_STATE);
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+
+  const contactNameExists = (name) => {
+    return contacts?.some(
+      (contact) => contact.name.toLowerCase() === name.toLowerCase(),
+    );
+  };
 
   const resetForm = () => {
     setUserCredentials(INITIAL_STATE);
@@ -30,9 +41,18 @@ const ContactForm = ({ addContact }) => {
 
     const { name, number } = userCredentials;
 
-    const trimmedCredentials = { name: name.trim(), number: number.trim() };
+    if (contactNameExists(name)) {
+      Notify.failure(`${name} already exists in the phonebook.`);
+      return;
+    }
 
-    addContact(trimmedCredentials);
+    const trimmedCredentials = {
+      id: nanoid(8),
+      name: name.trim(),
+      number: number.trim(),
+    };
+
+    dispatch(addContact(trimmedCredentials));
     resetForm();
   };
 
@@ -88,7 +108,5 @@ const ContactForm = ({ addContact }) => {
     </form>
   );
 };
-
-ContactForm.propTypes = { addContact: PropTypes.func.isRequired };
 
 export default ContactForm;

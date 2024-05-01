@@ -1,32 +1,30 @@
-import PropTypes from "prop-types";
-
 import ContactListItem from "../ContactListItem/ContactListItem";
+import { useSelector } from "react-redux";
+import { getContacts } from "../../redux/selectors/selectors";
+import { useEffect } from "react";
+import { LS_KEYS, saveToLocalStorage } from "../../common/helpers/localStorage";
 
-const ContactList = ({ contacts, deleteContact }) => {
+const ContactList = () => {
+  const contacts = useSelector(getContacts);
+
+  // TODO:
+  // const showFilteredContacts = () => {
+  //   return contacts?.filter(({ name }) =>
+  //     name.toLowerCase().includes(filter.toLowerCase()),
+  //   );
+  // };
+
+  useEffect(() => {
+    saveToLocalStorage(LS_KEYS.contacts, contacts);
+  }, [contacts]);
+
   return (
     <ul className="flex flex-col">
       {contacts?.map(({ name, number, id }) => (
-        <ContactListItem
-          key={id}
-          id={id}
-          name={name}
-          number={number}
-          deleteContact={deleteContact}
-        />
+        <ContactListItem key={id} id={id} name={name} number={number} />
       ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
-  deleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactList;
