@@ -1,21 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const contactsInitialState = [];
+const contactsInitialState = { items: [] };
 
 export const contactsSlice = createSlice({
   name: "contacts",
   initialState: contactsInitialState,
   reducers: {
-    addContact(state, { payload }) {
-      state.push(payload);
+    addContact: {
+      reducer: ({ items }, { payload }) => {
+        items.push(payload);
+      },
+      prepare: (contactCredentials) => {
+        return {
+          payload: {
+            id: nanoid(),
+            createdAt: new Date().toISOString(),
+            ...contactCredentials,
+          },
+        };
+      },
     },
-    deleteContact(state, { payload }) {
-      return state.filter((contact) => contact.id !== payload);
-    },
+    deleteContact: ({ items }, { payload }) =>
+      items.filter((contact) => contact.id !== payload),
   },
 });
 
-// TODO: add persisting logic
 
 export const { addContact, deleteContact } = contactsSlice.actions;
 export default contactsSlice.reducer;

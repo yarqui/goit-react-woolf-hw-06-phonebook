@@ -1,18 +1,18 @@
 import ContactListItem from "../ContactListItem/ContactListItem";
 import { useSelector } from "react-redux";
-import { getContacts } from "../../redux/selectors/selectors";
+import { selectContacts, selectFilter } from "../../redux/selectors/selectors";
 import { useEffect } from "react";
 import { LS_KEYS, saveToLocalStorage } from "../../common/helpers/localStorage";
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
+  console.log("contacts:", contacts);
+  const filterNameValue = useSelector(selectFilter);
+  console.log("filterNameValue:", filterNameValue);
 
-  // TODO:
-  // const showFilteredContacts = () => {
-  //   return contacts?.filter(({ name }) =>
-  //     name.toLowerCase().includes(filter.toLowerCase()),
-  //   );
-  // };
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filterNameValue.toLowerCase()),
+  );
 
   useEffect(() => {
     saveToLocalStorage(LS_KEYS.contacts, contacts);
@@ -20,7 +20,7 @@ const ContactList = () => {
 
   return (
     <ul className="flex flex-col">
-      {contacts?.map(({ name, number, id }) => (
+      {filteredContacts?.map(({ name, number, id }) => (
         <ContactListItem key={id} id={id} name={name} number={number} />
       ))}
     </ul>

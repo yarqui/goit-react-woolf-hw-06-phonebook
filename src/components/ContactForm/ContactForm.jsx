@@ -5,9 +5,9 @@ import Label from "../Label/Label";
 import Input from "../Input/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/slices/contactsSlice";
-import { nanoid } from "@reduxjs/toolkit";
-import { getContacts } from "../../redux/selectors/selectors";
+import { selectContacts } from "../../redux/selectors/selectors";
 import { Notify } from "notiflix";
+
 const INITIAL_STATE = {
   name: "",
   number: "",
@@ -16,7 +16,7 @@ const INITIAL_STATE = {
 const ContactForm = () => {
   const [userCredentials, setUserCredentials] = useState(INITIAL_STATE);
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const contactNameExists = (name) => {
     return contacts?.some(
@@ -47,7 +47,6 @@ const ContactForm = () => {
     }
 
     const trimmedCredentials = {
-      id: nanoid(8),
       name: name.trim(),
       number: number.trim(),
     };
