@@ -1,18 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Label from "../Label/Label";
 import Input from "../Input/Input";
 import { setFilter } from "../../redux/slices/filterSlice";
-import { selectFilter } from "../../redux/selectors/selectors";
 import debounce from "../../common/helpers/debounce";
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const filterValue = useSelector(selectFilter);
 
   const debouncedSetFilter = debounce((val) => {
     dispatch(setFilter(val));
-  }, 1000);
+  }, 500);
 
   const handleChange = (e) => {
     debouncedSetFilter(e.target.value);
@@ -24,7 +22,6 @@ const Filter = () => {
         type="text"
         name="filter"
         title="Filter"
-        value={filterValue}
         onChange={handleChange}
         className="peer placeholder-transparent"
         placeholder="Find contacts"
