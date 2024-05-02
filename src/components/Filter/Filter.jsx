@@ -1,16 +1,37 @@
-import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import Label from "../Label/Label";
 import Input from "../Input/Input";
+import { setFilter } from "../../redux/slices/filterSlice";
 
-const Filter = ({ filterContacts }) => {
+const Filter = () => {
+  const [filterValue, setFilterValue] = useState("");
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setFilterValue(e.target.value);
+  };
+
+  // debounce filter
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      dispatch(setFilter(filterValue));
+    }, 500);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [filterValue, dispatch]);
+
   return (
     <div className="relative mb-10 flex flex-col-reverse gap-1">
       <Input
         type="text"
         name="filter"
         title="Filter"
-        onChange={(e) => filterContacts(e.target.value)}
-        required
+        value={filterValue}
+        onChange={handleChange}
         className="peer placeholder-transparent"
         placeholder="Find contacts"
       />
@@ -22,10 +43,6 @@ const Filter = ({ filterContacts }) => {
       />
     </div>
   );
-};
-
-Filter.propTypes = {
-  filterContacts: PropTypes.func.isRequired,
 };
 
 export default Filter;
