@@ -20,6 +20,7 @@ const Filter = () => {
     <div className="relative mb-10 flex flex-col-reverse gap-1">
       <Input
         type="text"
+        id="filter"
         name="filter"
         title="Filter"
         onChange={handleChange}
