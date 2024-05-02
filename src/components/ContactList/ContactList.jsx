@@ -1,14 +1,9 @@
-import ContactListItem from "../ContactListItem/ContactListItem";
 import { useSelector } from "react-redux";
-import { selectContacts, selectFilter } from "../../redux/selectors/selectors";
+import ContactListItem from "../ContactListItem/ContactListItem";
+import { selectFilteredContacts } from "../../redux/selectors/selectors";
 
 const ContactList = () => {
-  const contacts = useSelector(selectContacts);
-  const filterNameValue = useSelector(selectFilter);
-
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filterNameValue.toLowerCase()),
-  );
+  const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
     <ul className="flex flex-col">
