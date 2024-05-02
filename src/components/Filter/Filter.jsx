@@ -1,28 +1,22 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Label from "../Label/Label";
 import Input from "../Input/Input";
 import { setFilter } from "../../redux/slices/filterSlice";
+import { selectFilter } from "../../redux/selectors/selectors";
+import debounce from "../../common/helpers/debounce";
 
 const Filter = () => {
-  const [filterValue, setFilterValue] = useState("");
   const dispatch = useDispatch();
+  const filterValue = useSelector(selectFilter);
+
+  const debouncedSetFilter = debounce((val) => {
+    dispatch(setFilter(val));
+  }, 1000);
 
   const handleChange = (e) => {
-    setFilterValue(e.target.value);
+    debouncedSetFilter(e.target.value);
   };
-
-  // debounce filter
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      dispatch(setFilter(filterValue));
-    }, 500);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [filterValue, dispatch]);
 
   return (
     <div className="relative mb-10 flex flex-col-reverse gap-1">
