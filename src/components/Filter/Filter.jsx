@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import Label from "../Label/Label";
 import Input from "../Input/Input";
-import { useDispatch } from "react-redux";
 import { setFilter } from "../../redux/slices/filterSlice";
-import { useEffect, useState } from "react";
 
 const Filter = () => {
   const [filterValue, setFilterValue] = useState("");
@@ -12,6 +13,7 @@ const Filter = () => {
     setFilterValue(e.target.value);
   };
 
+  // debounce filter
   useEffect(() => {
     const timerId = setTimeout(() => {
       dispatch(setFilter(filterValue));

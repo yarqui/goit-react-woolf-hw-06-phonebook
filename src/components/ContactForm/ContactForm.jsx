@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { Notify } from "notiflix";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../../common/components/Button/Button";
 import Label from "../Label/Label";
 import Input from "../Input/Input";
-import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/slices/contactsSlice";
 import { selectContacts } from "../../redux/selectors/selectors";
-import { Notify } from "notiflix";
 
 const INITIAL_STATE = {
   name: "",

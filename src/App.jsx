@@ -15,18 +15,6 @@ Notiflix.Block.init({
 });
 
 const App = () => {
-  // const [contacts, setContacts] = useState(() => {
-  //   try {
-  //     const contacts = getFromLocalStorage(LS_KEYS.contacts) ?? [];
-
-  //     return contacts;
-  //   } catch (error) {
-  //     console.error("error", error);
-
-  //     return [];
-  //   }
-  // });
-
   return (
     <div className="container ">
       <Section>
@@ -47,9 +35,3 @@ const App = () => {
 };
 
 export default App;
-
-// TODO:
-
-// -✅ add favicon
-
-// - add persisting logic
